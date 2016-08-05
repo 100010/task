@@ -3,7 +3,7 @@ nclude<stdio.h>
 
 int main(int ac, char **av)
 {
-    double dt = 0.01;
+    double dt = 0.05;
     double dx =0.2;
     double end_t =atof (av[1]);
     int n = (int)(10.0 / dx) +1;
@@ -13,7 +13,7 @@ int main(int ac, char **av)
     for (i= 0; i < n; i++){
         double x = (double)i * dx;
 
-        if(){
+        if(x==10.0){
 	    u[i] =1.0;
         } else{
             u[i]=0.0;
@@ -29,9 +29,11 @@ int main(int ac, char **av)
 	}
 
         for (i = 0; i< n; i++) {
-            unew[i] = u[i];
+            unew[i] = u[i] + (u[i+1] - 2.0*u[i] + u[i-1]) / (dx*dx) * dt;
 	}
 
+        unew[0] = 0.0;
+        unew[n-1] = 1.0;
 
 	for (i = 0; i < n; i++) {
 	    u[i] = unew[i];
